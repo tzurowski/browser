@@ -1,0 +1,41 @@
+1. WebBrowser & Panel (miejsce gdzie będzie wyświetlała się nasza strona)
+- metoda Navigate 
+- dodanie opcji widoku pełnego adresu (np. gdy wpiszemy google.pl, po przekierwaniu otrzymamy https://www.google.pl; )
+2. Address bar
+- pole tekstowe 
+- dodanie obsługi Entera
+3. Go back & GO forward
+- aktywowanie widoczności kontrolek
+- metoda GoBack() i GoForward()
+4. Refresh
+- metoda Refresh()
+5. Home
+- przeniesienie pod domyślną stronę domową/otwarcie nowej zakładki
+6. "Bookmark this page"
+- zapis adresu do pliku tekstowego
+- ponowne kliknięcie usuwa podany adres z pliku tekstowego
+- sprawdzanie czy podany adres jest w ulubionych
+7. Add to tab
+- dodanie linku jako zakładki, możliwość nazwania zakładki 
+8. Show history
+- nowa zakładka z wczytaniem pliku historii
+9. History 
+- po każdym przejściu zapis do pliku adresu
+10. New window/incognito
+- nowy Form/nowy Form nie posiadający zapisu historii
+11. Download files
+- WebClient
+- async
+12. Find on this website
+- jedna z opcji
+13. Print
+- jedna z opcji 
+14. Help
+- jedna z opcji 
+15. Options
+- menu z wyborem opcji
+16. Settings
+a) ustawienie strony domowej
+b) ustawienie domyślnej wyszukiwarki
+c) ustawienie domyślnej ścieżki zapisu plików
+
