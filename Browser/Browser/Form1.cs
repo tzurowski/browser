@@ -16,5 +16,25 @@ namespace Browser
         {
             InitializeComponent();
         }
+
+        private void address_bar_textbos_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            webBrowser1.Navigate(address_bar_textbos.Text);
+        }
+
+        private void back_btn_Click(object sender, EventArgs e)
+        {
+            webBrowser1.GoBack();
+        }
+
+        private void next_btn_Click(object sender, EventArgs e)
+        {
+            webBrowser1.GoForward();
+        }
     }
 }

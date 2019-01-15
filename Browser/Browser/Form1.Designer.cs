@@ -43,6 +43,7 @@
             this.findOnThisWebsiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +55,7 @@
             this.back_btn.TabIndex = 0;
             this.back_btn.Text = "<-";
             this.back_btn.UseVisualStyleBackColor = true;
+            this.back_btn.Click += new System.EventHandler(this.back_btn_Click);
             // 
             // next_btn
             // 
@@ -63,13 +65,15 @@
             this.next_btn.TabIndex = 1;
             this.next_btn.Text = "->";
             this.next_btn.UseVisualStyleBackColor = true;
+            this.next_btn.Click += new System.EventHandler(this.next_btn_Click);
             // 
             // address_bar_textbos
             // 
-            this.address_bar_textbos.Location = new System.Drawing.Point(130, 5);
+            this.address_bar_textbos.Location = new System.Drawing.Point(128, 5);
             this.address_bar_textbos.Name = "address_bar_textbos";
-            this.address_bar_textbos.Size = new System.Drawing.Size(1049, 22);
+            this.address_bar_textbos.Size = new System.Drawing.Size(1012, 22);
             this.address_bar_textbos.TabIndex = 2;
+            this.address_bar_textbos.TextChanged += new System.EventHandler(this.address_bar_textbos_TextChanged);
             // 
             // webBrowser1
             // 
@@ -160,11 +164,22 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
             this.helpToolStripMenuItem.Text = "Help";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1146, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(58, 33);
+            this.button1.TabIndex = 5;
+            this.button1.Text = ">>";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1271, 660);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.address_bar_textbos);
             this.Controls.Add(this.next_btn);
@@ -197,6 +212,7 @@
         private System.Windows.Forms.ToolStripMenuItem findOnThisWebsiteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
     }
 }
 
