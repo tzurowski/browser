@@ -41,5 +41,15 @@ namespace Browser
         {
 
         }
+
+        private void address_bar_textbos_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                webBrowser1.Navigate(address_bar_textbos.Text);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
     }
 }
