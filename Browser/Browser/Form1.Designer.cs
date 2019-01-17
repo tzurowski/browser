@@ -100,6 +100,7 @@
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(855, 774);
             this.webBrowser1.TabIndex = 3;
+            this.webBrowser1.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser1_Navigated);
             // 
             // menuStrip1
             // 
@@ -189,7 +190,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Location = new System.Drawing.Point(687, 6);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(76, 32);
             this.button1.TabIndex = 5;
@@ -201,7 +202,7 @@
             // 
             this.home_btn.AllowDrop = true;
             this.home_btn.Location = new System.Drawing.Point(98, 7);
-            this.home_btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.home_btn.Margin = new System.Windows.Forms.Padding(4);
             this.home_btn.Name = "home_btn";
             this.home_btn.Size = new System.Drawing.Size(82, 34);
             this.home_btn.TabIndex = 5;
@@ -214,7 +215,7 @@
             // refresh_btn
             // 
             this.refresh_btn.Location = new System.Drawing.Point(188, 7);
-            this.refresh_btn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.refresh_btn.Margin = new System.Windows.Forms.Padding(4);
             this.refresh_btn.Name = "refresh_btn";
             this.refresh_btn.Size = new System.Drawing.Size(91, 34);
             this.refresh_btn.TabIndex = 6;
@@ -229,7 +230,7 @@
             this.panel1.Controls.Add(this.refresh_btn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(288, 46);
             this.panel1.TabIndex = 7;
@@ -240,7 +241,7 @@
             this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.panel2.Location = new System.Drawing.Point(16, 91);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(0, 0);
             this.panel2.TabIndex = 8;
@@ -252,7 +253,7 @@
             this.panel3.Controls.Add(this.panel1);
             this.panel3.Controls.Add(this.address_bar_textbos);
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(767, 46);
             this.panel3.TabIndex = 9;

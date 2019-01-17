@@ -96,5 +96,10 @@ namespace Browser
             var form = new Form2(this);
             form.ShowDialog();
         }
+
+        private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        {
+            address_bar_textbos.Text = webBrowser1.Url.ToString();
+        }
     }
 }
