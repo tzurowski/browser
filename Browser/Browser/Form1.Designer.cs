@@ -43,17 +43,15 @@
             this.findOnThisWebsiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-
             this.button1 = new System.Windows.Forms.Button();
             this.home_btn = new System.Windows.Forms.Button();
             this.refresh_btn = new System.Windows.Forms.Button();
-
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // back_btn
             // 
-            this.back_btn.Location = new System.Drawing.Point(0, 0);
+            this.back_btn.Location = new System.Drawing.Point(0, 5);
             this.back_btn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.back_btn.Name = "back_btn";
             this.back_btn.Size = new System.Drawing.Size(44, 27);
@@ -64,7 +62,7 @@
             // 
             // next_btn
             // 
-            this.next_btn.Location = new System.Drawing.Point(48, 0);
+            this.next_btn.Location = new System.Drawing.Point(48, 5);
             this.next_btn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.next_btn.Name = "next_btn";
             this.next_btn.Size = new System.Drawing.Size(44, 27);
@@ -75,26 +73,20 @@
             // 
             // address_bar_textbos
             // 
-
-            this.address_bar_textbos.Location = new System.Drawing.Point(128, 5);
-            this.address_bar_textbos.Name = "address_bar_textbos";
-            this.address_bar_textbos.Size = new System.Drawing.Size(1012, 22);
-
-            
+            this.address_bar_textbos.Location = new System.Drawing.Point(237, 9);
             this.address_bar_textbos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            
-            
-
+            this.address_bar_textbos.Name = "address_bar_textbos";
+            this.address_bar_textbos.Size = new System.Drawing.Size(828, 20);
             this.address_bar_textbos.TabIndex = 2;
             this.address_bar_textbos.TextChanged += new System.EventHandler(this.address_bar_textbos_TextChanged);
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(0, 31);
+            this.webBrowser1.Location = new System.Drawing.Point(0, 38);
             this.webBrowser1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(15, 16);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(944, 514);
+            this.webBrowser1.Size = new System.Drawing.Size(1188, 592);
             this.webBrowser1.TabIndex = 3;
             // 
             // menuStrip1
@@ -103,10 +95,10 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(899, 0);
+            this.menuStrip1.Location = new System.Drawing.Point(1146, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(54, 536);
+            this.menuStrip1.Size = new System.Drawing.Size(54, 666);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -179,19 +171,19 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-
-  // button1
+            // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1146, 0);
+            this.button1.Location = new System.Drawing.Point(1085, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(58, 33);
             this.button1.TabIndex = 5;
             this.button1.Text = ">>";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // home_btn
             // 
-            this.home_btn.Location = new System.Drawing.Point(97, 1);
+            this.home_btn.Location = new System.Drawing.Point(97, 7);
             this.home_btn.Name = "home_btn";
             this.home_btn.Size = new System.Drawing.Size(61, 26);
             this.home_btn.TabIndex = 5;
@@ -200,7 +192,7 @@
             // 
             // refresh_btn
             // 
-            this.refresh_btn.Location = new System.Drawing.Point(164, 2);
+            this.refresh_btn.Location = new System.Drawing.Point(164, 8);
             this.refresh_btn.Name = "refresh_btn";
             this.refresh_btn.Size = new System.Drawing.Size(68, 25);
             this.refresh_btn.TabIndex = 6;
@@ -211,8 +203,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-
-            this.ClientSize = new System.Drawing.Size(1271, 660);
+            this.ClientSize = new System.Drawing.Size(1200, 666);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.refresh_btn);
             this.Controls.Add(this.home_btn);
