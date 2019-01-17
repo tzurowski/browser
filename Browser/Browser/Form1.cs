@@ -36,5 +36,10 @@ namespace Browser
         {
             webBrowser1.GoForward();
         }
+
+        private void home_btn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
