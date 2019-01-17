@@ -161,6 +161,7 @@
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(319, 36);
             this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // findOnThisWebsiteToolStripMenuItem
             // 
@@ -194,6 +195,7 @@
             // 
             // home_btn
             // 
+            this.home_btn.AllowDrop = true;
             this.home_btn.Location = new System.Drawing.Point(110, 8);
             this.home_btn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.home_btn.Name = "home_btn";
@@ -201,7 +203,9 @@
             this.home_btn.TabIndex = 5;
             this.home_btn.Text = "Home";
             this.home_btn.UseVisualStyleBackColor = true;
-            this.home_btn.Click += new System.EventHandler(this.home_btn_Click);
+            this.home_btn.Click += new System.EventHandler(this.home_btn_Click);            
+            this.home_btn.DragDrop += new System.Windows.Forms.DragEventHandler(this.home_btn_DragDrop);
+            this.home_btn.DragEnter += new System.Windows.Forms.DragEventHandler(this.home_btn_DragEnter);
             // 
             // refresh_btn
             // 
@@ -257,12 +261,16 @@
             this.ClientSize = new System.Drawing.Size(947, 1025);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.refresh_btn);
+            this.Controls.Add(this.home_btn);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
