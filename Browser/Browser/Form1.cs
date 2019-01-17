@@ -10,11 +10,32 @@ using System.Windows.Forms;
 
 namespace Browser
 {
+
     public partial class Form1 : Form
     {
+        public string Home_website { get; set; }
+        public string Default_searcher { get; set; }
+        public string Default_download_folder { get; set; }
+
         public Form1()
         {
             InitializeComponent();
+            Load_user_settings();
+        }
+
+        private void Load_user_settings()
+        {
+            Home_website = Properties.Settings.Default.Home_website;
+            Default_searcher = Properties.Settings.Default.Default_search;
+            Default_download_folder = Properties.Settings.Default.Default_download_folder;
+        }
+
+        private void Save_user_settings()
+        {
+            Properties.Settings.Default.Home_website = Home_website;
+            Properties.Settings.Default.Default_search = Default_searcher;
+            Properties.Settings.Default.Default_download_folder = Default_download_folder;
+            Properties.Settings.Default.Save();
         }
 
         private void address_bar_textbos_TextChanged(object sender, EventArgs e)
@@ -35,6 +56,31 @@ namespace Browser
         private void next_btn_Click(object sender, EventArgs e)
         {
             webBrowser1.GoForward();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Save_user_settings();
+        }
+
+        private void home_btn_DragDrop(object sender, DragEventArgs e)
+        {
+            Home_website=(string)e.Data.GetData(DataFormats.Text);
+        }
+
+        private void home_btn_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.Text) && (e.AllowedEffect & DragDropEffects.Copy) != 0)
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new Form2(this);
+            form.ShowDialog();
+            
         }
     }
 }
