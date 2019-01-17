@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Home_website" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://www.nytimes.com/</Value>
+      <Value Profile="(Default)">nytimes.com</Value>
     </Setting>
     <Setting Name="Default_download_folder" Type="System.String" Scope="User">
       <Value Profile="(Default)">Downloads</Value>

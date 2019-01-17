@@ -14,7 +14,7 @@ namespace Browser
     public partial class Form1 : Form
     {
         public string Home_website { get; set; }
-        public string Default_searcher { get; set; }
+        public string Default_search { get; set; }
         public string Default_download_folder { get; set; }
 
         public Form1()
@@ -27,14 +27,14 @@ namespace Browser
         private void Load_user_settings()
         {
             Home_website = Properties.Settings.Default.Home_website;
-            Default_searcher = Properties.Settings.Default.Default_search;
+            Default_search = Properties.Settings.Default.Default_search;
             Default_download_folder = Properties.Settings.Default.Default_download_folder;
         }
 
         private void Save_user_settings()
         {
             Properties.Settings.Default.Home_website = Home_website;
-            Properties.Settings.Default.Default_search = Default_searcher;
+            Properties.Settings.Default.Default_search = Default_search;
             Properties.Settings.Default.Default_download_folder = Default_download_folder;
             Properties.Settings.Default.Save();
         }

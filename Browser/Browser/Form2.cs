@@ -20,7 +20,7 @@ namespace Browser
             mainform = form;
             foreach (string search in searchs)
                 default_search_comboBox.Items.Add(search);
-            default_search_comboBox.Text = mainform.Default_searcher;
+            default_search_comboBox.Text = mainform.Default_search;
 
             default_foldertextBoxt.Text = mainform.Default_download_folder;
         }
@@ -28,7 +28,7 @@ namespace Browser
         private void save_btn_Click(object sender, EventArgs e)
         {
             mainform.Default_download_folder = default_foldertextBoxt.Text;
-            mainform.Default_searcher = default_search_comboBox.Text;
+            mainform.Default_search = default_search_comboBox.Text;
         }
     }
 }

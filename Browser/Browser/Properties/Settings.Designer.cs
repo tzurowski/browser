@@ -25,7 +25,7 @@ namespace Browser.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.nytimes.com/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("nytimes.com")]
         public string Home_website {
             get {
                 return ((string)(this["Home_website"]));
