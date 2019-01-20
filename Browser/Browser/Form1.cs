@@ -21,7 +21,9 @@ namespace Browser
         {
             InitializeComponent();
             Load_user_settings();
+            webBrowser1.ScriptErrorsSuppressed = true;
             webBrowser1.Navigate(Home_website);
+            
         }
 
         private void Load_user_settings()
