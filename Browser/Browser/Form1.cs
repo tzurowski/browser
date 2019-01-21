@@ -7,12 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CefSharp;
+using CefSharp.WinForms;
+using CefSharp.WinForms.Internals;
 
 namespace Browser
 {
 
     public partial class Form1 : Form
     {
+        private readonly ChromiumWebBrowser browser;
         public string Home_website { get; set; }
         public string Default_search { get; set; }
         public string Default_download_folder { get; set; }
@@ -21,9 +25,12 @@ namespace Browser
         {
             InitializeComponent();
             Load_user_settings();
-            webBrowser1.ScriptErrorsSuppressed = true;
-            webBrowser1.Navigate(Home_website);
-            
+            browser = new ChromiumWebBrowser(Home_website)
+            {
+                Dock = DockStyle.Fill,
+            };
+            website_panel.Controls.Add(browser);
+            browser.AddressChanged += OnBrowserAddressChanged;
         }
 
         private void Load_user_settings()
@@ -48,17 +55,17 @@ namespace Browser
 
         private void button1_Click(object sender, EventArgs e)
         {
-            webBrowser1.Navigate(address_bar_textbos.Text);
+            browser.Load(address_bar_textbos.Text);
         }
 
         private void back_btn_Click(object sender, EventArgs e)
         {
-            webBrowser1.GoBack();
+            browser.Back();
         }
 
         private void next_btn_Click(object sender, EventArgs e)
         {
-            webBrowser1.GoForward();
+            browser.Forward();
         }
 
 
@@ -71,7 +78,7 @@ namespace Browser
         {
             if (e.KeyCode == Keys.Enter)
             {
-                webBrowser1.Navigate(address_bar_textbos.Text);
+                browser.Load(address_bar_textbos.Text);
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
@@ -100,9 +107,9 @@ namespace Browser
             form.ShowDialog();
         }
 
-        private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        private void OnBrowserAddressChanged(object sender, AddressChangedEventArgs args)
         {
-            address_bar_textbos.Text = webBrowser1.Url.ToString();
+            this.InvokeOnUiThreadIfRequired(() => address_bar_textbos.Text = args.Address);
         }
     }
 }

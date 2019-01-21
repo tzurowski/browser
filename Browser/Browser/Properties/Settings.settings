@@ -3,13 +3,13 @@
   <Profiles />
   <Settings>
     <Setting Name="Home_website" Type="System.String" Scope="User">
-      <Value Profile="(Default)">nytimes.com</Value>
+      <Value Profile="(Default)">www.nytimes.com</Value>
     </Setting>
     <Setting Name="Default_download_folder" Type="System.String" Scope="User">
       <Value Profile="(Default)">Downloads</Value>
     </Setting>
     <Setting Name="Default_search" Type="System.String" Scope="User">
-      <Value Profile="(Default)">google.com</Value>
+      <Value Profile="(Default)">www.google.com</Value>
     </Setting>
   </Settings>
 </SettingsFile>

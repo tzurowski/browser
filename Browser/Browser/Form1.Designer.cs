@@ -31,7 +31,6 @@
             this.back_btn = new System.Windows.Forms.Button();
             this.next_btn = new System.Windows.Forms.Button();
             this.address_bar_textbos = new System.Windows.Forms.TextBox();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -47,8 +46,8 @@
             this.home_btn = new System.Windows.Forms.Button();
             this.refresh_btn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.website_panel = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -88,19 +87,6 @@
             this.address_bar_textbos.TabIndex = 2;
             this.address_bar_textbos.TextChanged += new System.EventHandler(this.address_bar_textbos_TextChanged);
             this.address_bar_textbos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.address_bar_textbos_KeyDown);
-            // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.webBrowser1.Location = new System.Drawing.Point(0, 46);
-            this.webBrowser1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(855, 774);
-            this.webBrowser1.TabIndex = 3;
-            this.webBrowser1.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser1_Navigated);
             // 
             // menuStrip1
             // 
@@ -235,17 +221,6 @@
             this.panel1.Size = new System.Drawing.Size(288, 46);
             this.panel1.TabIndex = 7;
             // 
-            // panel2
-            // 
-            this.panel2.AutoSize = true;
-            this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.panel2.Location = new System.Drawing.Point(16, 91);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(0, 0);
-            this.panel2.TabIndex = 8;
-            // 
             // panel3
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -259,14 +234,23 @@
             this.panel3.Size = new System.Drawing.Size(767, 46);
             this.panel3.TabIndex = 9;
             // 
+            // website_panel
+            // 
+            this.website_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.website_panel.Location = new System.Drawing.Point(0, 41);
+            this.website_panel.Name = "website_panel";
+            this.website_panel.Size = new System.Drawing.Size(855, 779);
+            this.website_panel.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(855, 820);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.website_panel);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -289,7 +273,6 @@
         private System.Windows.Forms.Button back_btn;
         private System.Windows.Forms.Button next_btn;
         private System.Windows.Forms.TextBox address_bar_textbos;
-        private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -305,8 +288,8 @@
         private System.Windows.Forms.Button home_btn;
         private System.Windows.Forms.Button refresh_btn;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel website_panel;
     }
 }
 
