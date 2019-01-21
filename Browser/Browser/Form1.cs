@@ -31,6 +31,19 @@ namespace Browser
             };
             website_panel.Controls.Add(browser);
             browser.AddressChanged += OnBrowserAddressChanged;
+            browser.LoadingStateChanged += Browser_LoadingStateChanged;
+        }
+
+        private void Browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
+        {
+            if(e.CanGoBack)
+                this.InvokeOnUiThreadIfRequired(() => back_btn.Enabled = true);
+            else
+                this.InvokeOnUiThreadIfRequired(() => back_btn.Enabled = false);
+            if (e.CanGoForward)
+                this.InvokeOnUiThreadIfRequired(() => next_btn.Enabled = true);
+            else
+                this.InvokeOnUiThreadIfRequired(() => next_btn.Enabled = false);
         }
 
         private void Load_user_settings()
