@@ -124,5 +124,45 @@ namespace Browser
         {
             this.InvokeOnUiThreadIfRequired(() => address_bar_textbos.Text = args.Address);
         }
+
+        private void findOnThisWebsiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel_search.Visible = true;
+            
+        }
+
+        private void btn_search_close_Click(object sender, EventArgs e)
+        {
+            panel_search.Visible = false;
+            
+        }
+
+        private void textBox_search_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (textBox_search.Text.Length <= 0)
+                {
+                    browser.StopFinding(true);
+                }
+                else
+                {
+                    browser.Find(0, textBox_search.Text, true, false, false);
+                }
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void btn_search_next_Click(object sender, EventArgs e)
+        {
+            browser.Find(0, textBox_search.Text, true, false, false);
+        }
+
+        private void btn_search_before_Click(object sender, EventArgs e)
+        {
+            browser.Find(0, textBox_search.Text, false, false, false);
+        }
+
     }
 }
