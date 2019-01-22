@@ -12,6 +12,7 @@ using CefSharp.WinForms;
 using CefSharp.WinForms.Internals;
 using CefSharp.Example;
 using CefSharp.Example.Handlers;
+using System.IO;
 
 namespace Browser
 {
@@ -98,7 +99,13 @@ namespace Browser
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
+            if(e.KeyCode == Keys.Up)
+            {
+                BookmarksForm bookmarks = new BookmarksForm;
+                SaveToFile(file_name, address_bar_textbos.Text);
+            }
         }
+        
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Save_user_settings();
