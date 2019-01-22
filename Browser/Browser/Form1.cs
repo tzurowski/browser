@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
 using CefSharp.WinForms.Internals;
+using CefSharp.Example;
+using CefSharp.Example.Handlers;
 
 namespace Browser
 {
@@ -32,6 +34,7 @@ namespace Browser
             website_panel.Controls.Add(browser);
             browser.AddressChanged += OnBrowserAddressChanged;
             browser.LoadingStateChanged += Browser_LoadingStateChanged;
+            browser.DownloadHandler = new DownloadHandler();
         }
 
         private void Browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
