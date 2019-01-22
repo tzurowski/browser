@@ -102,6 +102,7 @@ namespace Browser
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Save_user_settings();
+            Cef.Shutdown();
         }
 
         private void home_btn_DragDrop(object sender, DragEventArgs e)
