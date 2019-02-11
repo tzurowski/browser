@@ -55,10 +55,10 @@
             // 
             // back_btn
             // 
-            this.back_btn.Location = new System.Drawing.Point(8, 6);
-            this.back_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.back_btn.Location = new System.Drawing.Point(6, 5);
+            this.back_btn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.back_btn.Name = "back_btn";
-            this.back_btn.Size = new System.Drawing.Size(39, 34);
+            this.back_btn.Size = new System.Drawing.Size(29, 28);
             this.back_btn.TabIndex = 0;
             this.back_btn.Text = "<-";
             this.back_btn.UseVisualStyleBackColor = true;
@@ -66,10 +66,10 @@
             // 
             // next_btn
             // 
-            this.next_btn.Location = new System.Drawing.Point(52, 6);
-            this.next_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.next_btn.Location = new System.Drawing.Point(39, 5);
+            this.next_btn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.next_btn.Name = "next_btn";
-            this.next_btn.Size = new System.Drawing.Size(39, 34);
+            this.next_btn.Size = new System.Drawing.Size(29, 28);
             this.next_btn.TabIndex = 1;
             this.next_btn.Text = "->";
             this.next_btn.UseVisualStyleBackColor = true;
@@ -80,12 +80,11 @@
             this.address_bar_textbos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.address_bar_textbos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.address_bar_textbos.Location = new System.Drawing.Point(295, 7);
-            this.address_bar_textbos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.address_bar_textbos.Location = new System.Drawing.Point(221, 6);
+            this.address_bar_textbos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.address_bar_textbos.Name = "address_bar_textbos";
-            this.address_bar_textbos.Size = new System.Drawing.Size(384, 29);
+            this.address_bar_textbos.Size = new System.Drawing.Size(289, 24);
             this.address_bar_textbos.TabIndex = 2;
-            this.address_bar_textbos.TextChanged += new System.EventHandler(this.address_bar_textbos_TextChanged);
             this.address_bar_textbos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.address_bar_textbos_KeyDown);
             // 
             // menuStrip1
@@ -94,10 +93,10 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(776, 0);
+            this.menuStrip1.Location = new System.Drawing.Point(575, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(79, 820);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(66, 666);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -115,70 +114,69 @@
             this.helpToolStripMenuItem});
             this.menuToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(68, 32);
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(57, 25);
             this.menuToolStripMenuItem.Text = "Menu";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(265, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(220, 6);
             // 
             // historyToolStripMenuItem
             // 
             this.historyToolStripMenuItem.Name = "historyToolStripMenuItem";
-            this.historyToolStripMenuItem.Size = new System.Drawing.Size(268, 32);
+            this.historyToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.historyToolStripMenuItem.Text = "History";
             // 
             // newWindowToolStripMenuItem
             // 
             this.newWindowToolStripMenuItem.Name = "newWindowToolStripMenuItem";
-            this.newWindowToolStripMenuItem.Size = new System.Drawing.Size(268, 32);
+            this.newWindowToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.newWindowToolStripMenuItem.Text = "New window";
             // 
             // newPrivateWindowToolStripMenuItem
             // 
             this.newPrivateWindowToolStripMenuItem.Name = "newPrivateWindowToolStripMenuItem";
-            this.newPrivateWindowToolStripMenuItem.Size = new System.Drawing.Size(268, 32);
+            this.newPrivateWindowToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.newPrivateWindowToolStripMenuItem.Text = "New private window";
             // 
             // downloadFilesToolStripMenuItem
             // 
             this.downloadFilesToolStripMenuItem.Name = "downloadFilesToolStripMenuItem";
-            this.downloadFilesToolStripMenuItem.Size = new System.Drawing.Size(268, 32);
+            this.downloadFilesToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.downloadFilesToolStripMenuItem.Text = "Download files";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(268, 32);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // findOnThisWebsiteToolStripMenuItem
             // 
             this.findOnThisWebsiteToolStripMenuItem.Name = "findOnThisWebsiteToolStripMenuItem";
-            this.findOnThisWebsiteToolStripMenuItem.Size = new System.Drawing.Size(268, 32);
+            this.findOnThisWebsiteToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.findOnThisWebsiteToolStripMenuItem.Text = "Find on this website";
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(268, 32);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.printToolStripMenuItem.Text = "Print";
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(268, 32);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(686, 6);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(514, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(76, 32);
+            this.button1.Size = new System.Drawing.Size(57, 26);
             this.button1.TabIndex = 5;
             this.button1.Text = ">>";
             this.button1.UseVisualStyleBackColor = true;
@@ -187,10 +185,9 @@
             // home_btn
             // 
             this.home_btn.AllowDrop = true;
-            this.home_btn.Location = new System.Drawing.Point(98, 7);
-            this.home_btn.Margin = new System.Windows.Forms.Padding(4);
+            this.home_btn.Location = new System.Drawing.Point(74, 6);
             this.home_btn.Name = "home_btn";
-            this.home_btn.Size = new System.Drawing.Size(82, 34);
+            this.home_btn.Size = new System.Drawing.Size(62, 28);
             this.home_btn.TabIndex = 5;
             this.home_btn.Text = "Home";
             this.home_btn.UseVisualStyleBackColor = true;
@@ -200,13 +197,13 @@
             // 
             // refresh_btn
             // 
-            this.refresh_btn.Location = new System.Drawing.Point(188, 7);
-            this.refresh_btn.Margin = new System.Windows.Forms.Padding(4);
+            this.refresh_btn.Location = new System.Drawing.Point(141, 6);
             this.refresh_btn.Name = "refresh_btn";
-            this.refresh_btn.Size = new System.Drawing.Size(91, 34);
+            this.refresh_btn.Size = new System.Drawing.Size(68, 28);
             this.refresh_btn.TabIndex = 6;
             this.refresh_btn.Text = "Refresh";
             this.refresh_btn.UseVisualStyleBackColor = true;
+            this.refresh_btn.Click += new System.EventHandler(this.refresh_btn_Click);
             // 
             // panel1
             // 
@@ -216,9 +213,8 @@
             this.panel1.Controls.Add(this.refresh_btn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(288, 46);
+            this.panel1.Size = new System.Drawing.Size(216, 37);
             this.panel1.TabIndex = 7;
             // 
             // panel3
@@ -229,9 +225,8 @@
             this.panel3.Controls.Add(this.address_bar_textbos);
             this.panel3.Controls.Add(this.button1);
             this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(767, 46);
+            this.panel3.Size = new System.Drawing.Size(575, 37);
             this.panel3.TabIndex = 9;
             // 
             // website_panel
@@ -239,21 +234,22 @@
             this.website_panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.website_panel.Location = new System.Drawing.Point(0, 41);
+            this.website_panel.Location = new System.Drawing.Point(0, 33);
+            this.website_panel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.website_panel.Name = "website_panel";
-            this.website_panel.Size = new System.Drawing.Size(855, 779);
+            this.website_panel.Size = new System.Drawing.Size(641, 633);
             this.website_panel.TabIndex = 10;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(855, 820);
+            this.ClientSize = new System.Drawing.Size(641, 666);
             this.Controls.Add(this.website_panel);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

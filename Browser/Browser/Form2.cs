@@ -21,7 +21,6 @@ namespace Browser
             foreach (string search in searchs)
                 default_search_comboBox.Items.Add(search);
             default_search_comboBox.Text = mainform.Default_search;
-
             default_foldertextBoxt.Text = mainform.Default_download_folder;
         }
 

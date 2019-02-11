@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
@@ -13,7 +14,6 @@ using CefSharp.WinForms.Internals;
 
 namespace Browser
 {
-
     public partial class Form1 : Form
     {
         private readonly ChromiumWebBrowser browser;
@@ -32,6 +32,13 @@ namespace Browser
             website_panel.Controls.Add(browser);
             browser.AddressChanged += OnBrowserAddressChanged;
             browser.LoadingStateChanged += Browser_LoadingStateChanged;
+            browser.LoadError += OnBrowserLoadError;
+        }
+
+        private bool CheckUrlAddress(string address)
+        {
+            var regAdress = new Regex(@".\..");
+            return (regAdress.IsMatch(address));
         }
 
         private void Browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
@@ -61,10 +68,7 @@ namespace Browser
             Properties.Settings.Default.Save();
         }
 
-        private void address_bar_textbos_TextChanged(object sender, EventArgs e)
-        {
 
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -84,7 +88,12 @@ namespace Browser
 
         private void home_btn_Click(object sender, EventArgs e)
         {
+            browser.Load(Home_website);
+        }
 
+        private void refresh_btn_Click(object sender, EventArgs e)
+        {
+            browser.Reload();
         }
 
         private void address_bar_textbos_KeyDown(object sender, KeyEventArgs e)
@@ -124,5 +133,29 @@ namespace Browser
         {
             this.InvokeOnUiThreadIfRequired(() => address_bar_textbos.Text = args.Address);
         }
+
+        private void OnBrowserLoadError(object sender, LoadErrorEventArgs e)
+        {
+           if (CheckUrlAddress(e.FailedUrl))
+           {
+                ;//tu nalezy wpisc instrukcje co zobic jesli strona sie nie zaladuje
+           }
+           else
+           {
+                string address = e.FailedUrl;
+                address = address.Remove(0, 7);
+                address = address.Remove(address.Length - 1, 1);
+
+                if (Default_search == "google.com")
+                    address = "https://www.google.com/search?q=" + address;
+                else if (Default_search == "bing.com")
+                    address = "https://www.bing.com/search?q=" + address;
+                else
+                    address = "https://search.yahoo.com/search?p=" + address;
+               browser.Load(address);
+           }
+        }
+
+
     }
 }
