@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
 using CefSharp.WinForms.Internals;
+using CefSharp.Example;
+using CefSharp.Example.Handlers;
+using System.IO;
 
 namespace Browser
 {
@@ -20,6 +23,7 @@ namespace Browser
         public string Home_website { get; set; }
         public string Default_search { get; set; }
         public string Default_download_folder { get; set; }
+        public string page_address { get { return address_bar_textbos.Text; } }
 
         public Form1()
         {
@@ -32,6 +36,7 @@ namespace Browser
             website_panel.Controls.Add(browser);
             browser.AddressChanged += OnBrowserAddressChanged;
             browser.LoadingStateChanged += Browser_LoadingStateChanged;
+            browser.DownloadHandler = new DownloadHandler();
         }
 
         private void Browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
@@ -95,10 +100,17 @@ namespace Browser
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
+            if(e.KeyCode == Keys.Up)
+            {
+                BookmarksForm bookmarks = new BookmarksForm(this);
+                bookmarks.ShowDialog();
+            }
         }
+        
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Save_user_settings();
+            Cef.Shutdown();
         }
 
         private void home_btn_DragDrop(object sender, DragEventArgs e)
