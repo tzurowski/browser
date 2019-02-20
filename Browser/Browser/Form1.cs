@@ -23,6 +23,7 @@ namespace Browser
         public string Home_website { get; set; }
         public string Default_search { get; set; }
         public string Default_download_folder { get; set; }
+        public string page_address { get { return address_bar_textbos.Text; } }
 
         public Form1()
         {

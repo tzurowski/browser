@@ -35,6 +35,7 @@ namespace Browser
         private void save_btn_Click(object sender, EventArgs e)
         {
             SaveToFile(name_txtb.Text, url_txtb.Text);
+            this.Close();
         }
 
         private void cancel_btn_Click(object sender, EventArgs e)
