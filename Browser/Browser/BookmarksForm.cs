@@ -24,7 +24,7 @@ namespace Browser
         }
         public void SaveToFile(string name, string text)
         {
-            using (StreamWriter sw = new StreamWriter(file_name))
+            using (StreamWriter sw = new StreamWriter(file_name, true))
             {
                 sw.Write(name);
                 sw.Write(";");
@@ -34,13 +34,46 @@ namespace Browser
         }
         private void save_btn_Click(object sender, EventArgs e)
         {
-            SaveToFile(name_txtb.Text, url_txtb.Text);
-            this.Close();
+            Protection();
         }
 
         private void cancel_btn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Protection()
+        {
+            bool none_exist = true;
+            using (var sr = new StreamReader(file_name))
+            {
+                string strline;
+                while ((strline = sr.ReadLine()) != null)
+                {
+                    string[] tab = strline.Split(';');
+                    
+                    if (name_txtb.Text.ToLower().Equals(tab[0].ToLower()))
+                    {
+                        MessageBox.Show("The bookmark name is currently in use.");
+                        name_txtb.Text = "";
+                        none_exist = false;
+                    }
+                }
+                
+            }
+            if (none_exist)
+            {
+                if (name_txtb.Text != "")
+                {
+                    SaveToFile(name_txtb.Text, url_txtb.Text);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Give the bookmark a name");
+                    none_exist = false;
+                }
+            }
         }
     }
 }
