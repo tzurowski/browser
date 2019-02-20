@@ -42,7 +42,7 @@
             this.url_label.Location = new System.Drawing.Point(30, 70);
             this.url_label.Name = "url_label";
             this.url_label.Size = new System.Drawing.Size(36, 17);
-            this.url_label.TabIndex = 0;
+            this.url_label.TabIndex = 5;
             this.url_label.Text = "URL";
             // 
             // url_txtb
@@ -51,6 +51,7 @@
             this.url_txtb.Name = "url_txtb";
             this.url_txtb.Size = new System.Drawing.Size(333, 22);
             this.url_txtb.TabIndex = 1;
+            this.url_txtb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.url_txtb_KeyDown);
             // 
             // name_label
             // 
@@ -58,7 +59,7 @@
             this.name_label.Location = new System.Drawing.Point(30, 37);
             this.name_label.Name = "name_label";
             this.name_label.Size = new System.Drawing.Size(45, 17);
-            this.name_label.TabIndex = 2;
+            this.name_label.TabIndex = 4;
             this.name_label.Text = "Name";
             // 
             // name_txtb
@@ -66,14 +67,15 @@
             this.name_txtb.Location = new System.Drawing.Point(92, 34);
             this.name_txtb.Name = "name_txtb";
             this.name_txtb.Size = new System.Drawing.Size(166, 22);
-            this.name_txtb.TabIndex = 3;
+            this.name_txtb.TabIndex = 0;
+            this.name_txtb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.name_txtb_KeyDown);
             // 
             // save_btn
             // 
             this.save_btn.Location = new System.Drawing.Point(92, 129);
             this.save_btn.Name = "save_btn";
             this.save_btn.Size = new System.Drawing.Size(140, 44);
-            this.save_btn.TabIndex = 4;
+            this.save_btn.TabIndex = 2;
             this.save_btn.Text = "Save";
             this.save_btn.UseVisualStyleBackColor = true;
             this.save_btn.Click += new System.EventHandler(this.save_btn_Click);
@@ -83,7 +85,7 @@
             this.cancel_btn.Location = new System.Drawing.Point(285, 129);
             this.cancel_btn.Name = "cancel_btn";
             this.cancel_btn.Size = new System.Drawing.Size(140, 44);
-            this.cancel_btn.TabIndex = 5;
+            this.cancel_btn.TabIndex = 3;
             this.cancel_btn.Text = "Cancel";
             this.cancel_btn.UseVisualStyleBackColor = true;
             this.cancel_btn.Click += new System.EventHandler(this.cancel_btn_Click);

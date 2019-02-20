@@ -75,5 +75,17 @@ namespace Browser
                 }
             }
         }
+
+        private void name_txtb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                Protection();
+        }
+
+        private void url_txtb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                Protection();
+        }
     }
 }
