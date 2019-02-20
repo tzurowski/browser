@@ -101,8 +101,8 @@ namespace Browser
             }
             if(e.KeyCode == Keys.Up)
             {
-                BookmarksForm bookmarks = new BookmarksForm;
-                SaveToFile(file_name, address_bar_textbos.Text);
+                BookmarksForm bookmarks = new BookmarksForm(this);
+                bookmarks.ShowDialog();
             }
         }
         

@@ -15,16 +15,31 @@ namespace Browser
     {
 
         string file_name = "bookmarks.txt";
-        public BookmarksForm()
+        Form1 main_site = new Form1();
+        public BookmarksForm(Form1 form1)
         {
             InitializeComponent();
+            main_site = form1;
+            url_txtb.Text = main_site.page_address;
         }
-        public static void SaveToFile(string fileName, string text)
+        public void SaveToFile(string name, string text)
         {
-            using (StreamWriter sw = new StreamWriter(fileName))
+            using (StreamWriter sw = new StreamWriter(file_name))
             {
+                sw.Write(name);
+                sw.Write(";");
                 sw.WriteLine(text);
             }
+            
+        }
+        private void save_btn_Click(object sender, EventArgs e)
+        {
+            SaveToFile(name_txtb.Text, url_txtb.Text);
+        }
+
+        private void cancel_btn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
