@@ -22,12 +22,16 @@ namespace Browser
                 default_search_comboBox.Items.Add(search);
             default_search_comboBox.Text = mainform.Default_search;
             default_foldertextBoxt.Text = mainform.Default_download_folder;
+            homeWebsite_textBox.Text = mainform.Home_website;
         }
 
         private void save_btn_Click(object sender, EventArgs e)
         {
             mainform.Default_download_folder = default_foldertextBoxt.Text;
             mainform.Default_search = default_search_comboBox.Text;
+            mainform.Home_website = homeWebsite_textBox.Text;
         }
+
+
     }
 }

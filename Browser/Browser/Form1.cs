@@ -12,6 +12,7 @@ using CefSharp;
 using CefSharp.WinForms;
 using CefSharp.WinForms.Internals;
 
+
 namespace Browser
 {
     public partial class Form1 : Form
@@ -32,13 +33,24 @@ namespace Browser
             website_panel.Controls.Add(browser);
             browser.AddressChanged += OnBrowserAddressChanged;
             browser.LoadingStateChanged += Browser_LoadingStateChanged;
-            browser.LoadError += OnBrowserLoadError;
+            LoadPage(Home_website);
         }
 
-        private bool CheckUrlAddress(string address)
+        private void LoadPage(string address)
         {
             var regAdress = new Regex(@".\..");
-            return (regAdress.IsMatch(address));
+            if (regAdress.IsMatch(address) && address.Split().Length == 1)
+                browser.Load(address);
+            else
+            {
+                if (Default_search == "google.com")
+                    address = "https://www.google.com/search?q=" + address;
+                else if (Default_search == "bing.com")
+                    address = "https://www.bing.com/search?q=" + address;
+                else
+                    address = "https://search.yahoo.com/search?p=" + address;
+                browser.Load(address);
+            }
         }
 
         private void Browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
@@ -72,7 +84,7 @@ namespace Browser
 
         private void button1_Click(object sender, EventArgs e)
         {
-            browser.Load(address_bar_textbos.Text);
+            LoadPage(address_bar_textbos.Text);
         }
 
         private void back_btn_Click(object sender, EventArgs e)
@@ -88,7 +100,7 @@ namespace Browser
 
         private void home_btn_Click(object sender, EventArgs e)
         {
-            browser.Load(Home_website);
+            LoadPage(Home_website);
         }
 
         private void refresh_btn_Click(object sender, EventArgs e)
@@ -100,7 +112,7 @@ namespace Browser
         {
             if (e.KeyCode == Keys.Enter)
             {
-                browser.Load(address_bar_textbos.Text);
+                LoadPage(address_bar_textbos.Text);
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
@@ -133,29 +145,5 @@ namespace Browser
         {
             this.InvokeOnUiThreadIfRequired(() => address_bar_textbos.Text = args.Address);
         }
-
-        private void OnBrowserLoadError(object sender, LoadErrorEventArgs e)
-        {
-           if (CheckUrlAddress(e.FailedUrl))
-           {
-                ;//tu nalezy wpisc instrukcje co zobic jesli strona sie nie zaladuje
-           }
-           else
-           {
-                string address = e.FailedUrl;
-                address = address.Remove(0, 7);
-                address = address.Remove(address.Length - 1, 1);
-
-                if (Default_search == "google.com")
-                    address = "https://www.google.com/search?q=" + address;
-                else if (Default_search == "bing.com")
-                    address = "https://www.bing.com/search?q=" + address;
-                else
-                    address = "https://search.yahoo.com/search?p=" + address;
-               browser.Load(address);
-           }
-        }
-
-
     }
 }
