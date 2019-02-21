@@ -26,6 +26,7 @@ namespace Browser
         public string Default_download_folder { get; set; }
         public string page_address { get { return address_bar_textbos.Text; } }
         public string page_name { get { return this.Text; } }
+        string file_name = "bookmarks.txt";
 
         public Form1()
         {
@@ -40,7 +41,7 @@ namespace Browser
             browser.LoadingStateChanged += Browser_LoadingStateChanged;
             browser.DownloadHandler = new DownloadHandler();
             browser.TitleChanged += Browser_TitleChanged;
-
+            Load_bookmarks();
             LoadPage(Home_website);
         }
 
@@ -224,6 +225,35 @@ namespace Browser
         {
             browser.Find(0, textBox_search.Text, false, false, false);
         }
+        private void Load_bookmarks()
+        {
+            var bookmarks = new ToolStripMenuItem() { Name = "Bookmarks", Text = "Bookmarks" };
 
+            int id = 0;
+            foreach (var items in Get_items_for_bookmarks())
+            {
+                ToolStripMenuItem item = new ToolStripMenuItem(items);
+                item.Tag = id;
+
+
+                id++;
+                bookmarks.DropDownItems.Add(item);
+            }
+            menuToolStripMenuItem.DropDownItems.Add(bookmarks);
+        }
+        private List<String> Get_items_for_bookmarks()
+        {
+            List<String> bookmarks_item = new List<String>();
+            using (var sr = new StreamReader(file_name))
+            {
+                string strline;
+                while ((strline = sr.ReadLine()) != null)
+                {
+                    string[] tab = strline.Split(';');
+                    bookmarks_item.Add(tab[0]);
+                }
+            }
+            return bookmarks_item;
+        }
     }
 }
