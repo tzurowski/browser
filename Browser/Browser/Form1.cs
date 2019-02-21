@@ -24,6 +24,7 @@ namespace Browser
         public string Default_search { get; set; }
         public string Default_download_folder { get; set; }
         public string page_address { get { return address_bar_textbos.Text; } }
+        public string page_name { get { return this.Text; } }
 
         public Form1()
         {
@@ -37,8 +38,33 @@ namespace Browser
             browser.AddressChanged += OnBrowserAddressChanged;
             browser.LoadingStateChanged += Browser_LoadingStateChanged;
             browser.DownloadHandler = new DownloadHandler();
+            browser.TitleChanged += Browser_TitleChanged;
         }
 
+        private void Browser_TitleChanged(object sender, TitleChangedEventArgs e)
+        {
+            InvokeIfNeeded(() => {
+                //ChromiumWebBrowser browser = (ChromiumWebBrowser)sender;
+                SetFormTitle(e.Title);
+            });
+
+        }
+        private void SetFormTitle(string tabName)
+        {
+            this.Text = tabName;
+        }
+
+        public void InvokeIfNeeded(Action action)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(action);
+            }
+            else
+            {
+                action.Invoke();
+            }
+        }
         private void Browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
         {
             if(e.CanGoBack)

@@ -21,6 +21,7 @@ namespace Browser
             InitializeComponent();
             main_site = form1;
             url_txtb.Text = main_site.page_address;
+            name_txtb.Text = main_site.page_name;
         }
         public void SaveToFile(string name, string text)
         {
