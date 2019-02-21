@@ -11,6 +11,9 @@ using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
 using CefSharp.WinForms.Internals;
+using CefSharp.Example;
+using CefSharp.Example.Handlers;
+using System.IO;
 
 
 namespace Browser
@@ -21,6 +24,8 @@ namespace Browser
         public string Home_website { get; set; }
         public string Default_search { get; set; }
         public string Default_download_folder { get; set; }
+        public string page_address { get { return address_bar_textbos.Text; } }
+        public string page_name { get { return this.Text; } }
 
         public Form1()
         {
@@ -33,6 +38,9 @@ namespace Browser
             website_panel.Controls.Add(browser);
             browser.AddressChanged += OnBrowserAddressChanged;
             browser.LoadingStateChanged += Browser_LoadingStateChanged;
+            browser.DownloadHandler = new DownloadHandler();
+            browser.TitleChanged += Browser_TitleChanged;
+
             LoadPage(Home_website);
         }
 
@@ -51,8 +59,33 @@ namespace Browser
                     address = "https://search.yahoo.com/search?p=" + address;
                 browser.Load(address);
             }
+
         }
 
+        private void Browser_TitleChanged(object sender, TitleChangedEventArgs e)
+        {
+            InvokeIfNeeded(() => {
+                //ChromiumWebBrowser browser = (ChromiumWebBrowser)sender;
+                SetFormTitle(e.Title);
+            });
+
+        }
+        private void SetFormTitle(string tabName)
+        {
+            this.Text = tabName;
+        }
+
+        public void InvokeIfNeeded(Action action)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(action);
+            }
+            else
+            {
+                action.Invoke();
+            }
+        }
         private void Browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
         {
             if(e.CanGoBack)
@@ -116,10 +149,17 @@ namespace Browser
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
+            if(e.KeyCode == Keys.Up)
+            {
+                BookmarksForm bookmarks = new BookmarksForm(this);
+                bookmarks.ShowDialog();
+            }
         }
+        
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Save_user_settings();
+            Cef.Shutdown();
         }
 
         private void home_btn_DragDrop(object sender, DragEventArgs e)
@@ -145,5 +185,45 @@ namespace Browser
         {
             this.InvokeOnUiThreadIfRequired(() => address_bar_textbos.Text = args.Address);
         }
+
+        private void findOnThisWebsiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel_search.Visible = true;
+            
+        }
+
+        private void btn_search_close_Click(object sender, EventArgs e)
+        {
+            panel_search.Visible = false;
+            
+        }
+
+        private void textBox_search_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (textBox_search.Text.Length <= 0)
+                {
+                    browser.StopFinding(true);
+                }
+                else
+                {
+                    browser.Find(0, textBox_search.Text, true, false, false);
+                }
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void btn_search_next_Click(object sender, EventArgs e)
+        {
+            browser.Find(0, textBox_search.Text, true, false, false);
+        }
+
+        private void btn_search_before_Click(object sender, EventArgs e)
+        {
+            browser.Find(0, textBox_search.Text, false, false, false);
+        }
+
     }
 }
