@@ -20,35 +20,83 @@ namespace Browser
 {
     public partial class Form1 : Form
     {
-        private readonly ChromiumWebBrowser browser;
+        class Tab
+        {
+            public ChromiumWebBrowser browser;
+            public string address;
+        }
+        private List<Tab> tabs = new List<Tab>();
+        private int currentTabIndex = 0;
+
+        public ChromiumWebBrowser currentBrowser { get { return tabs[currentTabIndex].browser; } }
+        public string currentAdress { get { return tabs[currentTabIndex].address; } set { tabs[currentTabIndex].address = value; } }
+
         public string Home_website { get; set; }
         public string Default_search { get; set; }
         public string Default_download_folder { get; set; }
-        public string page_address { get { return address_bar_textbos.Text; } }
+        //public string page_address { get { return address_bar_textbos.Text; } }
         public string page_name { get { return this.Text; } }
 
         public Form1()
         {
             InitializeComponent();
             Load_user_settings();
-            browser = new ChromiumWebBrowser(Home_website)
+
+            tabs.Add(new Tab());
+
+            tabs[currentTabIndex].address = Home_website;
+            tabs[currentTabIndex].browser = new ChromiumWebBrowser(Home_website)
             {
                 Dock = DockStyle.Fill,
             };
-            website_panel.Controls.Add(browser);
-            browser.AddressChanged += OnBrowserAddressChanged;
-            browser.LoadingStateChanged += Browser_LoadingStateChanged;
-            browser.DownloadHandler = new DownloadHandler();
-            browser.TitleChanged += Browser_TitleChanged;
+
+            currentBrowser.AddressChanged += OnBrowserAddressChanged;
+            currentBrowser.LoadingStateChanged += Browser_LoadingStateChanged;
+            currentBrowser.DownloadHandler = new DownloadHandler();
+            currentBrowser.TitleChanged += Browser_TitleChanged;
 
             LoadPage(Home_website);
+            tcControlTab.TabPages.Add(Home_website);
+            tcControlTab.SelectTab(currentTabIndex);
+            tcControlTab.SelectedTab.Controls.Add(currentBrowser);
+
+            tcControlTab.TabPages.Add("   +");
+            tcControlTab.SelectTab(1);
+            tcControlTab.SelectedTab.Name = "newTabPage";
+            tcControlTab.SelectTab(0);
+
+        }
+
+        private void AddTab(string address)
+        {
+
+            tabs.Add(new Tab());
+
+            currentTabIndex = tcControlTab.TabPages.Count - 1;
+            tabs[currentTabIndex].address = address;
+            tabs[currentTabIndex].browser = new ChromiumWebBrowser(address)
+            {
+                Dock = DockStyle.Fill,
+            };
+
+            currentBrowser.AddressChanged += OnBrowserAddressChanged;
+            currentBrowser.LoadingStateChanged += Browser_LoadingStateChanged;
+            currentBrowser.DownloadHandler = new DownloadHandler();
+            currentBrowser.TitleChanged += Browser_TitleChanged;
+
+
+            tcControlTab.TabPages.Insert(tcControlTab.TabPages.Count - 1, "New Tab");
+            tcControlTab.SelectTab(tcControlTab.TabPages.Count - 2);
+            tcControlTab.SelectedTab.Controls.Add(currentBrowser);
+            LoadPage("");
         }
 
         private void LoadPage(string address)
         {
+            currentAdress = address;
             var regAdress = new Regex(@".\..");
             if (regAdress.IsMatch(address) && address.Split().Length == 1)
-                browser.Load(address);
+                currentBrowser.Load(address);
             else
             {
                 if (Default_search == "google.com")
@@ -57,16 +105,16 @@ namespace Browser
                     address = "https://www.bing.com/search?q=" + address;
                 else
                     address = "https://search.yahoo.com/search?p=" + address;
-                browser.Load(address);
+                currentBrowser.Load(address);
             }
-
         }
 
         private void Browser_TitleChanged(object sender, TitleChangedEventArgs e)
         {
             InvokeIfNeeded(() => {
                 //ChromiumWebBrowser browser = (ChromiumWebBrowser)sender;
-                SetFormTitle(e.Title);
+                tcControlTab.SelectedTab.Text = e.Title;
+                //SetFormTitle(e.Title);
             });
 
         }
@@ -86,16 +134,17 @@ namespace Browser
                 action.Invoke();
             }
         }
+
         private void Browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
         {
-            if(e.CanGoBack)
-                this.InvokeOnUiThreadIfRequired(() => back_btn.Enabled = true);
+            if (e.CanGoBack)
+                this.InvokeOnUiThreadIfRequired(() => btnBack.Enabled = true);
             else
-                this.InvokeOnUiThreadIfRequired(() => back_btn.Enabled = false);
+                this.InvokeOnUiThreadIfRequired(() => btnBack.Enabled = false);
             if (e.CanGoForward)
-                this.InvokeOnUiThreadIfRequired(() => next_btn.Enabled = true);
+                this.InvokeOnUiThreadIfRequired(() => btnNext.Enabled = true);
             else
-                this.InvokeOnUiThreadIfRequired(() => next_btn.Enabled = false);
+                this.InvokeOnUiThreadIfRequired(() => btnNext.Enabled = false);
         }
 
         private void Load_user_settings()
@@ -117,19 +166,18 @@ namespace Browser
 
         private void button1_Click(object sender, EventArgs e)
         {
-            LoadPage(address_bar_textbos.Text);
+            LoadPage(txtAddresBar.Text);
         }
 
         private void back_btn_Click(object sender, EventArgs e)
         {
-            browser.Back();
+            currentBrowser.Back();
         }
 
         private void next_btn_Click(object sender, EventArgs e)
         {
-            browser.Forward();
+            currentBrowser.Forward();
         }
-
 
         private void home_btn_Click(object sender, EventArgs e)
         {
@@ -138,24 +186,24 @@ namespace Browser
 
         private void refresh_btn_Click(object sender, EventArgs e)
         {
-            browser.Reload();
+            currentBrowser.Reload();
         }
 
         private void address_bar_textbos_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                LoadPage(address_bar_textbos.Text);
+                LoadPage(txtAddresBar.Text);
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
-            if(e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.Up)
             {
                 BookmarksForm bookmarks = new BookmarksForm(this);
                 bookmarks.ShowDialog();
             }
         }
-        
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Save_user_settings();
@@ -164,7 +212,7 @@ namespace Browser
 
         private void home_btn_DragDrop(object sender, DragEventArgs e)
         {
-            Home_website=(string)e.Data.GetData(DataFormats.Text);
+            Home_website = (string)e.Data.GetData(DataFormats.Text);
         }
 
         private void home_btn_DragEnter(object sender, DragEventArgs e)
@@ -183,19 +231,17 @@ namespace Browser
 
         private void OnBrowserAddressChanged(object sender, AddressChangedEventArgs args)
         {
-            this.InvokeOnUiThreadIfRequired(() => address_bar_textbos.Text = args.Address);
+            this.InvokeOnUiThreadIfRequired(() => txtAddresBar.Text = args.Address);
         }
 
         private void findOnThisWebsiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             panel_search.Visible = true;
-            
         }
 
         private void btn_search_close_Click(object sender, EventArgs e)
         {
             panel_search.Visible = false;
-            
         }
 
         private void textBox_search_KeyDown(object sender, KeyEventArgs e)
@@ -204,11 +250,11 @@ namespace Browser
             {
                 if (textBox_search.Text.Length <= 0)
                 {
-                    browser.StopFinding(true);
+                    currentBrowser.StopFinding(true);
                 }
                 else
                 {
-                    browser.Find(0, textBox_search.Text, true, false, false);
+                    currentBrowser.Find(0, textBox_search.Text, true, false, false);
                 }
                 e.Handled = true;
                 e.SuppressKeyPress = true;
@@ -217,13 +263,30 @@ namespace Browser
 
         private void btn_search_next_Click(object sender, EventArgs e)
         {
-            browser.Find(0, textBox_search.Text, true, false, false);
+            currentBrowser.Find(0, textBox_search.Text, true, false, false);
         }
 
         private void btn_search_before_Click(object sender, EventArgs e)
         {
-            browser.Find(0, textBox_search.Text, false, false, false);
+            currentBrowser.Find(0, textBox_search.Text, false, false, false);
         }
 
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tcControlTab.SelectedTab.Name == "newTabPage")
+            {
+                AddTab(null);
+            }
+            else
+            {
+                currentTabIndex = tcControlTab.SelectedIndex;
+                txtAddresBar.Text = currentAdress;
+            }
+        }
+
+        private void txtAddresBar_TextChanged(object sender, EventArgs e)
+        {
+            currentAdress = txtAddresBar.Text;
+        }
     }
 }
