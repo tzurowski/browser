@@ -53,6 +53,7 @@
             this.btn_search_next = new System.Windows.Forms.Button();
             this.btn_search_before = new System.Windows.Forms.Button();
             this.textBox_search = new System.Windows.Forms.TextBox();
+            this.bookmarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -306,6 +307,12 @@
             this.textBox_search.TabIndex = 0;
             this.textBox_search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_search_KeyDown);
             // 
+            // bookmarksToolStripMenuItem
+            // 
+            this.bookmarksToolStripMenuItem.Name = "bookmarksToolStripMenuItem";
+            this.bookmarksToolStripMenuItem.Size = new System.Drawing.Size(268, 32);
+            this.bookmarksToolStripMenuItem.Text = "Bookmarks";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -360,6 +367,7 @@
         private System.Windows.Forms.Button btn_search_next;
         private System.Windows.Forms.Button btn_search_before;
         private System.Windows.Forms.TextBox textBox_search;
+        private System.Windows.Forms.ToolStripMenuItem bookmarksToolStripMenuItem;
     }
 }
 

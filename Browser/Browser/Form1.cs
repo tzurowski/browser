@@ -27,6 +27,7 @@ namespace Browser
         public string page_address { get { return address_bar_textbos.Text; } }
         public string page_name { get { return this.Text; } }
         string file_name = "bookmarks.txt";
+        string bookmark_name;
 
         public Form1()
         {
@@ -41,7 +42,6 @@ namespace Browser
             browser.LoadingStateChanged += Browser_LoadingStateChanged;
             browser.DownloadHandler = new DownloadHandler();
             browser.TitleChanged += Browser_TitleChanged;
-            Load_bookmarks();
             LoadPage(Home_website);
         }
 
@@ -165,7 +165,7 @@ namespace Browser
 
         private void home_btn_DragDrop(object sender, DragEventArgs e)
         {
-            Home_website=(string)e.Data.GetData(DataFormats.Text);
+            Home_website = (string)e.Data.GetData(DataFormats.Text);
         }
 
         private void home_btn_DragEnter(object sender, DragEventArgs e)
@@ -190,13 +190,13 @@ namespace Browser
         private void findOnThisWebsiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             panel_search.Visible = true;
-            
+
         }
 
         private void btn_search_close_Click(object sender, EventArgs e)
         {
             panel_search.Visible = false;
-            
+
         }
 
         private void textBox_search_KeyDown(object sender, KeyEventArgs e)
@@ -225,22 +225,59 @@ namespace Browser
         {
             browser.Find(0, textBox_search.Text, false, false, false);
         }
+
         private void Load_bookmarks()
         {
-            var bookmarks = new ToolStripMenuItem() { Name = "Bookmarks", Text = "Bookmarks" };
-
+            //delete items
+            bookmarksToolStripMenuItem.DropDownItems.Clear();
+            //add items
             int id = 0;
+            ToolStripMenuItem itemOne = new ToolStripMenuItem("Show bookmarks bar");
+            itemOne.Tag = id; id++;
+            bookmarksToolStripMenuItem.DropDownItems.Add(itemOne);
+            itemOne.Click += ItemOne_Click;
+            ToolStripMenuItem itemTwo = new ToolStripMenuItem("Bookmark manager");
+            itemTwo.Tag = id; id++;
+            bookmarksToolStripMenuItem.DropDownItems.Add(itemTwo);
+            itemTwo.Click += ItemTwo_Click;
+            bookmarksToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
             foreach (var items in Get_items_for_bookmarks())
             {
                 ToolStripMenuItem item = new ToolStripMenuItem(items);
                 item.Tag = id;
-
-
                 id++;
-                bookmarks.DropDownItems.Add(item);
+                bookmarksToolStripMenuItem.DropDownItems.Add(item);
+                item.Click += Item_Click;
+                bookmark_name = item.Text;
             }
-            menuToolStripMenuItem.DropDownItems.Add(bookmarks);
         }
+
+        private void Item_Click(object sender, EventArgs e)
+        {
+            using (var sr = new StreamReader(file_name))
+            {
+                string strline;
+                while ((strline = sr.ReadLine()) != null)
+                {
+                    string[] tab = strline.Split(';');
+                    if (sender.ToString() == tab[0])
+                    {
+                        LoadPage(tab[1]);
+                    }
+                }
+            }
+        }
+
+        private void ItemOne_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Test");
+        }
+
+        private void ItemTwo_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Test");
+        }
+
         private List<String> Get_items_for_bookmarks()
         {
             List<String> bookmarks_item = new List<String>();
@@ -255,5 +292,11 @@ namespace Browser
             }
             return bookmarks_item;
         }
+
+        private void menuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Load_bookmarks();
+        }
     }
 }
+
