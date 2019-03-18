@@ -48,7 +48,7 @@ namespace Browser
         private void LoadPage(string address)
         {
             var regAdress = new Regex(@".\..");
-            if (regAdress.IsMatch(address) && address.Split().Length == 1)
+            if(regAdress.IsMatch(address) && address.Split().Length == 1)
                 browser.Load(address);
             else
             {
@@ -78,7 +78,7 @@ namespace Browser
 
         public void InvokeIfNeeded(Action action)
         {
-            if (this.InvokeRequired)
+            if(this.InvokeRequired)
             {
                 this.BeginInvoke(action);
             }
@@ -93,7 +93,7 @@ namespace Browser
                 this.InvokeOnUiThreadIfRequired(() => back_btn.Enabled = true);
             else
                 this.InvokeOnUiThreadIfRequired(() => back_btn.Enabled = false);
-            if (e.CanGoForward)
+            if(e.CanGoForward)
                 this.InvokeOnUiThreadIfRequired(() => next_btn.Enabled = true);
             else
                 this.InvokeOnUiThreadIfRequired(() => next_btn.Enabled = false);
@@ -144,7 +144,7 @@ namespace Browser
 
         private void address_bar_textbos_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if(e.KeyCode == Keys.Enter)
             {
                 LoadPage(address_bar_textbos.Text);
                 e.Handled = true;
@@ -156,7 +156,7 @@ namespace Browser
                 bookmarks.ShowDialog();
             }
         }
-        
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Save_user_settings();
@@ -170,7 +170,7 @@ namespace Browser
 
         private void home_btn_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.Text) && (e.AllowedEffect & DragDropEffects.Copy) != 0)
+            if(e.Data.GetDataPresent(DataFormats.Text) && (e.AllowedEffect & DragDropEffects.Copy) != 0)
                 e.Effect = DragDropEffects.Copy;
             else
                 e.Effect = DragDropEffects.None;
@@ -201,7 +201,7 @@ namespace Browser
 
         private void textBox_search_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if(e.KeyCode == Keys.Enter)
             {
                 if (textBox_search.Text.Length <= 0)
                 {
