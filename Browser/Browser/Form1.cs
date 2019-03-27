@@ -20,16 +20,20 @@ namespace Browser
 {
     public partial class Form1 : Form
     {
-        class Tab
+        Image CloseImage;
+
+        public class Tab
         {
             public ChromiumWebBrowser browser;
             public string address;
+            public bool canGoBack, canGoForward;
         }
         private List<Tab> tabs = new List<Tab>();
         private int currentTabIndex = 0;
 
-        public ChromiumWebBrowser currentBrowser { get { return tabs[currentTabIndex].browser; } }
-        public string currentAdress { get { return tabs[currentTabIndex].address; } set { tabs[currentTabIndex].address = value; } }
+        public Tab currentTab { get { return tabs[currentTabIndex]; } set { tabs[currentTabIndex] = value; } }
+        public ChromiumWebBrowser currentBrowser { get { return currentTab.browser; } set { currentTab.browser = value; } }
+        public string currentAdress { get { return currentTab.address; } set { currentTab.address = value; } }
 
         public string Home_website { get; set; }
         public string Default_search { get; set; }
@@ -41,54 +45,24 @@ namespace Browser
         {
             InitializeComponent();
             Load_user_settings();
+        }
 
-            tabs.Add(new Tab());
+        #region Tabs&Browsers
 
-            tabs[currentTabIndex].address = Home_website;
-            tabs[currentTabIndex].browser = new ChromiumWebBrowser(Home_website)
-            {
-                Dock = DockStyle.Fill,
-            };
-
-            currentBrowser.AddressChanged += OnBrowserAddressChanged;
-            currentBrowser.LoadingStateChanged += Browser_LoadingStateChanged;
-            currentBrowser.DownloadHandler = new DownloadHandler();
-            currentBrowser.TitleChanged += Browser_TitleChanged;
-
-            LoadPage(Home_website);
-            tcControlTab.TabPages.Add(Home_website);
-            tcControlTab.SelectTab(currentTabIndex);
-            tcControlTab.SelectedTab.Controls.Add(currentBrowser);
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            tcControlTab.DrawMode = TabDrawMode.OwnerDrawFixed;
+            tcControlTab.DrawItem += tcControlTab_DrawItem;
+            CloseImage = Browser.Properties.Resources.closeR;
+            tcControlTab.Padding = new Point(10, 3);
 
             tcControlTab.TabPages.Add("   +");
-            tcControlTab.SelectTab(1);
+            tcControlTab.SelectTab(0);
             tcControlTab.SelectedTab.Name = "newTabPage";
             tcControlTab.SelectTab(0);
 
-        }
-
-        private void AddTab(string address)
-        {
-
-            tabs.Add(new Tab());
-
-            currentTabIndex = tcControlTab.TabPages.Count - 1;
-            tabs[currentTabIndex].address = address;
-            tabs[currentTabIndex].browser = new ChromiumWebBrowser(address)
-            {
-                Dock = DockStyle.Fill,
-            };
-
-            currentBrowser.AddressChanged += OnBrowserAddressChanged;
-            currentBrowser.LoadingStateChanged += Browser_LoadingStateChanged;
-            currentBrowser.DownloadHandler = new DownloadHandler();
-            currentBrowser.TitleChanged += Browser_TitleChanged;
-
-
-            tcControlTab.TabPages.Insert(tcControlTab.TabPages.Count - 1, "New Tab");
-            tcControlTab.SelectTab(tcControlTab.TabPages.Count - 2);
-            tcControlTab.SelectedTab.Controls.Add(currentBrowser);
-            LoadPage("");
+            tcControlTab.DrawMode = TabDrawMode.OwnerDrawFixed;
+            AddNewTab(Home_website);
         }
 
         private void LoadPage(string address)
@@ -109,19 +83,108 @@ namespace Browser
             }
         }
 
-        private void Browser_TitleChanged(object sender, TitleChangedEventArgs e)
+        private void AddNewTab(string address)
         {
-            InvokeIfNeeded(() => {
-                //ChromiumWebBrowser browser = (ChromiumWebBrowser)sender;
-                tcControlTab.SelectedTab.Text = e.Title;
-                //SetFormTitle(e.Title);
-            });
+            tabs.Add(new Tab());
 
+            currentTabIndex = tcControlTab.TabPages.Count - 1;
+            currentAdress = address;
+            currentBrowser = new ChromiumWebBrowser(address)
+            {
+                Dock = DockStyle.Fill,
+            };
+
+            currentBrowser.AddressChanged += OnBrowserAddressChanged;
+            currentBrowser.LoadingStateChanged += Browser_LoadingStateChanged;
+            currentBrowser.DownloadHandler = new DownloadHandler();
+            currentBrowser.TitleChanged += Browser_TitleChanged;
+
+
+            tcControlTab.TabPages.Insert(tcControlTab.TabPages.Count - 1, "New Tab");
+            tcControlTab.SelectTab(tcControlTab.TabPages.Count - 2);
+            tcControlTab.SelectedTab.Controls.Add(currentBrowser);
+            LoadPage(address);
         }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tcControlTab.SelectedTab.Name == "newTabPage")
+            {
+                AddNewTab(Home_website);
+            }
+            else
+            {
+                currentTabIndex = tcControlTab.SelectedIndex;
+                btnBack.Enabled = currentTab.canGoBack;
+                btnNext.Enabled = currentTab.canGoForward;
+                txtAddresBar.Text = currentAdress;
+            }
+        }
+
+        public static Rectangle GetRTLCoordinates(Rectangle container, Rectangle drawRectangle)
+        {
+            return new Rectangle(
+                container.Width - drawRectangle.Width - drawRectangle.X,
+                drawRectangle.Y,
+                drawRectangle.Width,
+                drawRectangle.Height);
+        }
+
+        private void tcControlTab_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            try
+            {
+                var tabRect = this.tcControlTab.GetTabRect(e.Index);
+                tabRect.Inflate(-2, -2);
+                var imageRect = new Rectangle(tabRect.Right - CloseImage.Width,
+                                         tabRect.Top + (tabRect.Height - CloseImage.Height) / 2,
+                                         CloseImage.Width,
+                                         CloseImage.Height);
+
+                var sf = new StringFormat(StringFormat.GenericDefault);
+                if (this.tcControlTab.RightToLeft == System.Windows.Forms.RightToLeft.Yes &&
+                    this.tcControlTab.RightToLeftLayout == true)
+                {
+                    tabRect = GetRTLCoordinates(this.tcControlTab.ClientRectangle, tabRect);
+                    imageRect = GetRTLCoordinates(this.tcControlTab.ClientRectangle, imageRect);
+                    sf.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
+                }
+
+                e.Graphics.DrawString(this.tcControlTab.TabPages[e.Index].Text, this.Font, Brushes.Black, tabRect, sf);
+                if (e.Index != tcControlTab.TabCount - 1) 
+                    e.Graphics.DrawImage(CloseImage, imageRect.Location);
+            }
+            catch (Exception) { }
+        }
+
+        private void tcControlTab_MouseDown(object sender, MouseEventArgs e)
+        {
+            for (var i = 0; i < this.tcControlTab.TabPages.Count-1; i++)
+            {
+                var tabRect = this.tcControlTab.GetTabRect(i);
+                tabRect.Inflate(-2, -2);
+                var imageRect = new Rectangle(tabRect.Right - CloseImage.Width,
+                                         tabRect.Top + (tabRect.Height - CloseImage.Height) / 2,
+                                         CloseImage.Width,
+                                         CloseImage.Height);
+                if (imageRect.Contains(e.Location))
+                {
+                    if(tabs.Count==1)
+                        Environment.Exit(0);
+
+                    tabs[i].browser.Dispose();
+                    tcControlTab.TabPages.RemoveAt(i);
+                    tabs.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+
         private void SetFormTitle(string tabName)
         {
             this.Text = tabName;
         }
+
 
         public void InvokeIfNeeded(Action action)
         {
@@ -135,18 +198,37 @@ namespace Browser
             }
         }
 
+        private void OnBrowserAddressChanged(object sender, AddressChangedEventArgs args)
+        {
+            this.InvokeOnUiThreadIfRequired(() => txtAddresBar.Text = args.Address);
+        }
+
         private void Browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
         {
             if (e.CanGoBack)
-                this.InvokeOnUiThreadIfRequired(() => btnBack.Enabled = true);
+                this.InvokeOnUiThreadIfRequired(() => btnBack.Enabled = currentTab.canGoBack = true);
             else
-                this.InvokeOnUiThreadIfRequired(() => btnBack.Enabled = false);
+                this.InvokeOnUiThreadIfRequired(() => btnBack.Enabled = currentTab.canGoBack = false);
             if (e.CanGoForward)
-                this.InvokeOnUiThreadIfRequired(() => btnNext.Enabled = true);
+                this.InvokeOnUiThreadIfRequired(() => btnNext.Enabled = currentTab.canGoForward = true);
             else
-                this.InvokeOnUiThreadIfRequired(() => btnNext.Enabled = false);
+                this.InvokeOnUiThreadIfRequired(() => btnNext.Enabled = currentTab.canGoForward = false);
         }
 
+        private void Browser_TitleChanged(object sender, TitleChangedEventArgs e)
+        {
+            InvokeIfNeeded(() => {
+                string title = e.Title;
+                SetFormTitle(title);
+                if (title.Length > 20)
+                    title = title.Substring(0, 17) + "...";
+                tcControlTab.SelectedTab.Text = title;
+            });
+        }
+
+        #endregion
+
+        #region userSettings
         private void Load_user_settings()
         {
             Home_website = Properties.Settings.Default.Home_website;
@@ -161,8 +243,7 @@ namespace Browser
             Properties.Settings.Default.Default_download_folder = Default_download_folder;
             Properties.Settings.Default.Save();
         }
-
-
+        #endregion
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -204,41 +285,6 @@ namespace Browser
             }
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Save_user_settings();
-            Cef.Shutdown();
-        }
-
-        private void home_btn_DragDrop(object sender, DragEventArgs e)
-        {
-            Home_website = (string)e.Data.GetData(DataFormats.Text);
-        }
-
-        private void home_btn_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.Text) && (e.AllowedEffect & DragDropEffects.Copy) != 0)
-                e.Effect = DragDropEffects.Copy;
-            else
-                e.Effect = DragDropEffects.None;
-        }
-
-        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = new Form2(this);
-            form.ShowDialog();
-        }
-
-        private void OnBrowserAddressChanged(object sender, AddressChangedEventArgs args)
-        {
-            this.InvokeOnUiThreadIfRequired(() => txtAddresBar.Text = args.Address);
-        }
-
-        private void findOnThisWebsiteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            panel_search.Visible = true;
-        }
-
         private void btn_search_close_Click(object sender, EventArgs e)
         {
             panel_search.Visible = false;
@@ -261,6 +307,35 @@ namespace Browser
             }
         }
 
+        private void home_btn_DragDrop(object sender, DragEventArgs e)
+        {
+            Home_website = (string)e.Data.GetData(DataFormats.Text);
+        }
+
+        private void home_btn_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.Text) && (e.AllowedEffect & DragDropEffects.Copy) != 0)
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new Form2(this);
+            form.ShowDialog();
+        }
+
+        private void findOnThisWebsiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel_search.Visible = true;
+        }
+
+        private void txtAddresBar_TextChanged(object sender, EventArgs e)
+        {
+            currentAdress = txtAddresBar.Text;
+        }
+
         private void btn_search_next_Click(object sender, EventArgs e)
         {
             currentBrowser.Find(0, textBox_search.Text, true, false, false);
@@ -271,22 +346,10 @@ namespace Browser
             currentBrowser.Find(0, textBox_search.Text, false, false, false);
         }
 
-        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (tcControlTab.SelectedTab.Name == "newTabPage")
-            {
-                AddTab(null);
-            }
-            else
-            {
-                currentTabIndex = tcControlTab.SelectedIndex;
-                txtAddresBar.Text = currentAdress;
-            }
-        }
-
-        private void txtAddresBar_TextChanged(object sender, EventArgs e)
-        {
-            currentAdress = txtAddresBar.Text;
+            Save_user_settings();
+            Cef.Shutdown();
         }
     }
 }

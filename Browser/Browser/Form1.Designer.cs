@@ -304,7 +304,9 @@
             this.tcControlTab.SelectedIndex = 0;
             this.tcControlTab.Size = new System.Drawing.Size(641, 515);
             this.tcControlTab.TabIndex = 13;
+            this.tcControlTab.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tcControlTab_DrawItem);
             this.tcControlTab.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
+            this.tcControlTab.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tcControlTab_MouseDown);
             // 
             // Form1
             // 
@@ -321,6 +323,7 @@
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
