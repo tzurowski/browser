@@ -343,21 +343,6 @@ namespace Browser
             currentBrowser.Reload();
         }
 
-        private void address_bar_textbos_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Enter)
-            {
-                LoadPage(txtAddresBar.Text);
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
-            if (e.KeyCode == Keys.Up)
-            {
-                BookmarksForm bookmarks = new BookmarksForm(this);
-                bookmarks.ShowDialog();
-            }
-        }
-
         private void btn_search_close_Click(object sender, EventArgs e)
         {
             panel_search.Visible = false;
@@ -377,6 +362,17 @@ namespace Browser
                 }
                 e.Handled = true;
                 e.SuppressKeyPress = true;
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+                LoadPage(txtAddresBar.Text);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+            if (e.KeyCode == Keys.Up)
+            {
+                BookmarksForm bookmarks = new BookmarksForm(this);
+                bookmarks.ShowDialog();
             }
         }
 
