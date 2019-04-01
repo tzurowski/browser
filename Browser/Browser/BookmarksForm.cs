@@ -20,7 +20,7 @@ namespace Browser
         {
             InitializeComponent();
             main_site = form1;
-            url_txtb.Text = main_site.page_address;
+            url_txtb.Text = main_site.currentAdress;
             name_txtb.Text = main_site.page_name;
             if (!File.Exists(file_name)) File.Create(file_name).Dispose();
         }
