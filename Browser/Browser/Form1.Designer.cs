@@ -52,9 +52,9 @@
             this.btn_search_close = new System.Windows.Forms.Button();
             this.btn_search_next = new System.Windows.Forms.Button();
             this.btn_search_before = new System.Windows.Forms.Button();
-            this.textBox_search = new System.Windows.Forms.TextBox();
             this.bookmarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tcControlTab = new System.Windows.Forms.TabControl();
+            this.bookmarksToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -63,10 +63,10 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(6, 5);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.btnBack.Location = new System.Drawing.Point(8, 6);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(29, 27);
+            this.btnBack.Size = new System.Drawing.Size(39, 33);
             this.btnBack.TabIndex = 0;
             this.btnBack.Text = "<-";
             this.btnBack.UseVisualStyleBackColor = true;
@@ -74,10 +74,10 @@
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(39, 5);
-            this.btnNext.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.btnNext.Location = new System.Drawing.Point(52, 6);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(29, 27);
+            this.btnNext.Size = new System.Drawing.Size(39, 33);
             this.btnNext.TabIndex = 1;
             this.btnNext.Text = "->";
             this.btnNext.UseVisualStyleBackColor = true;
@@ -88,13 +88,13 @@
             this.txtAddresBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAddresBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtAddresBar.Location = new System.Drawing.Point(221, 6);
-            this.txtAddresBar.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.txtAddresBar.Location = new System.Drawing.Point(295, 7);
+            this.txtAddresBar.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.txtAddresBar.Name = "txtAddresBar";
-            this.txtAddresBar.Size = new System.Drawing.Size(289, 24);
+            this.txtAddresBar.Size = new System.Drawing.Size(384, 29);
             this.txtAddresBar.TabIndex = 2;
             this.txtAddresBar.TextChanged += new System.EventHandler(this.txtAddresBar_TextChanged);
-            this.txtAddresBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.address_bar_textbos_KeyDown);
+            this.txtAddresBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_search_KeyDown);
             // 
             // menuStrip1
             // 
@@ -102,10 +102,10 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.msMainMenu});
-            this.menuStrip1.Location = new System.Drawing.Point(576, 0);
+            this.menuStrip1.Location = new System.Drawing.Point(777, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(65, 549);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(78, 676);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -120,45 +120,47 @@
             this.miOptions,
             this.miFindOnThisWebsite,
             this.miPrint,
-            this.miHelp});
+            this.miHelp,
+            this.bookmarksToolStripMenuItem1});
             this.msMainMenu.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.msMainMenu.Name = "msMainMenu";
-            this.msMainMenu.Size = new System.Drawing.Size(58, 25);
+            this.msMainMenu.Size = new System.Drawing.Size(145, 32);
             this.msMainMenu.Text = "Menu";
+            this.msMainMenu.Click += new System.EventHandler(this.menuToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(220, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(265, 6);
             // 
             // miHistory
             // 
             this.miHistory.Name = "miHistory";
-            this.miHistory.Size = new System.Drawing.Size(223, 26);
+            this.miHistory.Size = new System.Drawing.Size(268, 32);
             this.miHistory.Text = "History";
             // 
             // miNewWindow
             // 
             this.miNewWindow.Name = "miNewWindow";
-            this.miNewWindow.Size = new System.Drawing.Size(223, 26);
+            this.miNewWindow.Size = new System.Drawing.Size(268, 32);
             this.miNewWindow.Text = "New window";
             // 
             // miNewPrivateWindow
             // 
             this.miNewPrivateWindow.Name = "miNewPrivateWindow";
-            this.miNewPrivateWindow.Size = new System.Drawing.Size(223, 26);
+            this.miNewPrivateWindow.Size = new System.Drawing.Size(268, 32);
             this.miNewPrivateWindow.Text = "New private window";
             // 
             // miDownloadFiles
             // 
             this.miDownloadFiles.Name = "miDownloadFiles";
-            this.miDownloadFiles.Size = new System.Drawing.Size(223, 26);
+            this.miDownloadFiles.Size = new System.Drawing.Size(268, 32);
             this.miDownloadFiles.Text = "Download files";
             // 
             // miOptions
             // 
             this.miOptions.Name = "miOptions";
-            this.miOptions.Size = new System.Drawing.Size(223, 26);
+            this.miOptions.Size = new System.Drawing.Size(268, 32);
             this.miOptions.Text = "Options";
             this.miOptions.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -166,28 +168,29 @@
             // 
             this.miFindOnThisWebsite.Name = "miFindOnThisWebsite";
             this.miFindOnThisWebsite.ShowShortcutKeys = false;
-            this.miFindOnThisWebsite.Size = new System.Drawing.Size(223, 26);
+            this.miFindOnThisWebsite.Size = new System.Drawing.Size(268, 32);
             this.miFindOnThisWebsite.Text = "Find on this website";
             this.miFindOnThisWebsite.Click += new System.EventHandler(this.findOnThisWebsiteToolStripMenuItem_Click);
             // 
             // miPrint
             // 
             this.miPrint.Name = "miPrint";
-            this.miPrint.Size = new System.Drawing.Size(223, 26);
+            this.miPrint.Size = new System.Drawing.Size(268, 32);
             this.miPrint.Text = "Print";
             // 
             // miHelp
             // 
             this.miHelp.Name = "miHelp";
-            this.miHelp.Size = new System.Drawing.Size(223, 26);
+            this.miHelp.Size = new System.Drawing.Size(268, 32);
             this.miHelp.Text = "Help";
             // 
             // btnEnter
             // 
             this.btnEnter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEnter.Location = new System.Drawing.Point(515, 5);
+            this.btnEnter.Location = new System.Drawing.Point(687, 6);
+            this.btnEnter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEnter.Name = "btnEnter";
-            this.btnEnter.Size = new System.Drawing.Size(57, 26);
+            this.btnEnter.Size = new System.Drawing.Size(76, 32);
             this.btnEnter.TabIndex = 5;
             this.btnEnter.Text = ">>";
             this.btnEnter.UseVisualStyleBackColor = true;
@@ -196,9 +199,10 @@
             // btnHome
             // 
             this.btnHome.AllowDrop = true;
-            this.btnHome.Location = new System.Drawing.Point(73, 6);
+            this.btnHome.Location = new System.Drawing.Point(97, 7);
+            this.btnHome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(61, 27);
+            this.btnHome.Size = new System.Drawing.Size(81, 33);
             this.btnHome.TabIndex = 5;
             this.btnHome.Text = "Home";
             this.btnHome.UseVisualStyleBackColor = true;
@@ -208,9 +212,10 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(141, 6);
+            this.btnRefresh.Location = new System.Drawing.Point(188, 7);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(68, 27);
+            this.btnRefresh.Size = new System.Drawing.Size(91, 33);
             this.btnRefresh.TabIndex = 6;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
@@ -224,8 +229,9 @@
             this.panel1.Controls.Add(this.btnRefresh);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(216, 38);
+            this.panel1.Size = new System.Drawing.Size(288, 47);
             this.panel1.TabIndex = 7;
             // 
             // panel3
@@ -236,50 +242,49 @@
             this.panel3.Controls.Add(this.txtAddresBar);
             this.panel3.Controls.Add(this.btnEnter);
             this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(575, 38);
+            this.panel3.Size = new System.Drawing.Size(767, 47);
             this.panel3.TabIndex = 9;
             // 
             // panel_search
             // 
-            this.panel_search.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_search.Controls.Add(this.textBox_search);
             this.panel_search.Controls.Add(this.btn_search_close);
             this.panel_search.Controls.Add(this.btn_search_next);
             this.panel_search.Controls.Add(this.btn_search_before);
-            this.panel_search.Location = new System.Drawing.Point(459, 90);
-            this.panel_search.Margin = new System.Windows.Forms.Padding(2);
+            this.panel_search.Location = new System.Drawing.Point(612, 111);
+            this.panel_search.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel_search.Name = "panel_search";
-            this.panel_search.Size = new System.Drawing.Size(171, 29);
+            this.panel_search.Size = new System.Drawing.Size(228, 36);
             this.panel_search.TabIndex = 12;
             this.panel_search.Visible = false;
             // 
             // textBox_search
             // 
-            this.textBox_search.Location = new System.Drawing.Point(2, 5);
-            this.textBox_search.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox_search.Location = new System.Drawing.Point(3, 6);
+            this.textBox_search.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_search.Name = "textBox_search";
-            this.textBox_search.Size = new System.Drawing.Size(110, 20);
+            this.textBox_search.Size = new System.Drawing.Size(145, 22);
             this.textBox_search.TabIndex = 0;
             this.textBox_search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_search_KeyDown);
             // 
             // btn_search_close
             // 
-            this.btn_search_close.Location = new System.Drawing.Point(153, 2);
-            this.btn_search_close.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_search_close.Location = new System.Drawing.Point(204, 2);
+            this.btn_search_close.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_search_close.Name = "btn_search_close";
-            this.btn_search_close.Size = new System.Drawing.Size(17, 25);
+            this.btn_search_close.Size = new System.Drawing.Size(23, 31);
             this.btn_search_close.TabIndex = 3;
             this.btn_search_close.Text = "x";
             this.btn_search_close.UseVisualStyleBackColor = true;
-            this.btn_search_close.Click += new System.EventHandler(this.btn_search_close_Click);
             // 
             // btn_search_next
             // 
-            this.btn_search_next.Location = new System.Drawing.Point(134, 2);
-            this.btn_search_next.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_search_next.Location = new System.Drawing.Point(179, 2);
+            this.btn_search_next.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_search_next.Name = "btn_search_next";
-            this.btn_search_next.Size = new System.Drawing.Size(17, 25);
+            this.btn_search_next.Size = new System.Drawing.Size(23, 31);
             this.btn_search_next.TabIndex = 2;
             this.btn_search_next.Text = ">";
             this.btn_search_next.UseVisualStyleBackColor = true;
@@ -287,28 +292,14 @@
             // 
             // btn_search_before
             // 
-            this.btn_search_before.Location = new System.Drawing.Point(113, 2);
-            this.btn_search_before.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_search_before.Location = new System.Drawing.Point(151, 2);
+            this.btn_search_before.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_search_before.Name = "btn_search_before";
-            this.btn_search_before.Size = new System.Drawing.Size(17, 25);
+            this.btn_search_before.Size = new System.Drawing.Size(23, 31);
             this.btn_search_before.TabIndex = 1;
             this.btn_search_before.Text = "<";
             this.btn_search_before.UseVisualStyleBackColor = true;
             this.btn_search_before.Click += new System.EventHandler(this.btn_search_before_Click);
-            // 
-            // tcControlTab
-            // 
-            this.tcControlTab.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tcControlTab.Location = new System.Drawing.Point(0, 34);
-            this.tcControlTab.Name = "tcControlTab";
-            this.tcControlTab.SelectedIndex = 0;
-            this.tcControlTab.Size = new System.Drawing.Size(641, 515);
-            this.tcControlTab.TabIndex = 13;
-            this.tcControlTab.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tcControlTab_DrawItem);
-            this.tcControlTab.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
-            this.tcControlTab.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tcControlTab_MouseDown);
             // 
             // bookmarksToolStripMenuItem
             // 
@@ -316,11 +307,32 @@
             this.bookmarksToolStripMenuItem.Size = new System.Drawing.Size(268, 32);
             this.bookmarksToolStripMenuItem.Text = "Bookmarks";
             // 
+            // tcControlTab
+            // 
+            this.tcControlTab.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tcControlTab.Location = new System.Drawing.Point(0, 42);
+            this.tcControlTab.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tcControlTab.Name = "tcControlTab";
+            this.tcControlTab.SelectedIndex = 0;
+            this.tcControlTab.Size = new System.Drawing.Size(855, 634);
+            this.tcControlTab.TabIndex = 13;
+            this.tcControlTab.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tcControlTab_DrawItem);
+            this.tcControlTab.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
+            this.tcControlTab.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tcControlTab_MouseDown);
+            // 
+            // bookmarksToolStripMenuItem1
+            // 
+            this.bookmarksToolStripMenuItem1.Name = "bookmarksToolStripMenuItem1";
+            this.bookmarksToolStripMenuItem1.Size = new System.Drawing.Size(268, 32);
+            this.bookmarksToolStripMenuItem1.Text = "Bookmarks";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 549);
+            this.ClientSize = new System.Drawing.Size(855, 676);
             this.Controls.Add(this.panel_search);
             this.Controls.Add(this.tcControlTab);
             this.Controls.Add(this.menuStrip1);
@@ -372,6 +384,7 @@
         private System.Windows.Forms.TextBox textBox_search;
         private System.Windows.Forms.ToolStripMenuItem bookmarksToolStripMenuItem;
         private System.Windows.Forms.TabControl tcControlTab;
+        private System.Windows.Forms.ToolStripMenuItem bookmarksToolStripMenuItem1;
     }
 }
 

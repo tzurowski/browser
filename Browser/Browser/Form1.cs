@@ -247,6 +247,77 @@ namespace Browser
         }
         #endregion
 
+        #region Bookmarks
+        private void Load_bookmarks()
+        {
+            //delete items
+            bookmarksToolStripMenuItem1.DropDownItems.Clear();
+            //add items
+            int id = 0;
+            ToolStripMenuItem itemOne = new ToolStripMenuItem("Show bookmarks bar");
+            itemOne.Tag = id; id++;
+            bookmarksToolStripMenuItem1.DropDownItems.Add(itemOne);
+            itemOne.Click += ItemOne_Click;
+            ToolStripMenuItem itemTwo = new ToolStripMenuItem("Bookmark manager");
+            itemTwo.Tag = id; id++;
+            bookmarksToolStripMenuItem1.DropDownItems.Add(itemTwo);
+            itemTwo.Click += ItemTwo_Click;
+            bookmarksToolStripMenuItem1.DropDownItems.Add(new ToolStripSeparator());
+            foreach (var items in Get_items_for_bookmarks())
+            {
+                ToolStripMenuItem item = new ToolStripMenuItem(items);
+                item.Tag = id;
+                id++;
+                bookmarksToolStripMenuItem1.DropDownItems.Add(item);
+                item.Click += Item_Click;
+                bookmark_name = item.Text;
+            }
+        }
+
+        private void Item_Click(object sender, EventArgs e)
+        {
+            using (var sr = new StreamReader(file_name))
+            {
+                string strline;
+                while ((strline = sr.ReadLine()) != null)
+                {
+                    string[] tab = strline.Split(';');
+                    if (sender.ToString() == tab[0])
+                    {
+                        LoadPage(tab[1]);
+                    }
+                }
+                sr.Close();
+            }
+        }
+
+        private void ItemOne_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Test");
+        }
+
+        private void ItemTwo_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Test");
+        }
+
+        private List<String> Get_items_for_bookmarks()
+        {
+            List<String> bookmarks_item = new List<String>();
+            using (var sr = new StreamReader(file_name))
+            {
+                string strline;
+                while ((strline = sr.ReadLine()) != null)
+                {
+                    string[] tab = strline.Split(';');
+                    bookmarks_item.Add(tab[0]);
+                }
+                sr.Close();
+            }
+            return bookmarks_item;
+        }
+        #endregion
+
         private void button1_Click(object sender, EventArgs e)
         {
             LoadPage(txtAddresBar.Text);
@@ -334,27 +405,8 @@ namespace Browser
 
         }
 
-        private void btn_search_close_Click(object sender, EventArgs e)
-        {
-            panel_search.Visible = false;
-
-        }
-
         private void txtAddresBar_TextChanged(object sender, EventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
-            {
-                if (textBox_search.Text.Length <= 0)
-                {
-                    browser.StopFinding(true);
-                }
-                else
-                {
-                    browser.Find(0, textBox_search.Text, true, false, false);
-                }
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
             currentAdress = txtAddresBar.Text;
         }
 
@@ -368,78 +420,13 @@ namespace Browser
             currentBrowser.Find(0, textBox_search.Text, false, false, false);
         }
 
-        private void Load_bookmarks()
-        {
-            //delete items
-            bookmarksToolStripMenuItem.DropDownItems.Clear();
-            //add items
-            int id = 0;
-            ToolStripMenuItem itemOne = new ToolStripMenuItem("Show bookmarks bar");
-            itemOne.Tag = id; id++;
-            bookmarksToolStripMenuItem.DropDownItems.Add(itemOne);
-            itemOne.Click += ItemOne_Click;
-            ToolStripMenuItem itemTwo = new ToolStripMenuItem("Bookmark manager");
-            itemTwo.Tag = id; id++;
-            bookmarksToolStripMenuItem.DropDownItems.Add(itemTwo);
-            itemTwo.Click += ItemTwo_Click;
-            bookmarksToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
-            foreach (var items in Get_items_for_bookmarks())
-            {
-                ToolStripMenuItem item = new ToolStripMenuItem(items);
-                item.Tag = id;
-                id++;
-                bookmarksToolStripMenuItem.DropDownItems.Add(item);
-                item.Click += Item_Click;
-                bookmark_name = item.Text;
-            }
-        }
-
-        private void Item_Click(object sender, EventArgs e)
-        {
-            using (var sr = new StreamReader(file_name))
-            {
-                string strline;
-                while ((strline = sr.ReadLine()) != null)
-                {
-                    string[] tab = strline.Split(';');
-                    if (sender.ToString() == tab[0])
-                    {
-                        LoadPage(tab[1]);
-                    }
-                }
-                sr.Close();
-            }
-        }
-
-        private void ItemOne_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Test");
-        }
-
-        private void ItemTwo_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Test");
-        }
-
-        private List<String> Get_items_for_bookmarks()
-        {
-            List<String> bookmarks_item = new List<String>();
-            using (var sr = new StreamReader(file_name))
-            {
-                string strline;
-                while ((strline = sr.ReadLine()) != null)
-                {
-                    string[] tab = strline.Split(';');
-                    bookmarks_item.Add(tab[0]);
-                }
-                sr.Close();
-            }
-            return bookmarks_item;
-        }
+        
 
         private void menuToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Load_bookmarks();
+        }
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Save_user_settings();
