@@ -22,6 +22,7 @@ namespace Browser
             main_site = form1;
             url_txtb.Text = main_site.page_address;
             name_txtb.Text = main_site.page_name;
+            if (!File.Exists(file_name)) File.Create(file_name).Dispose();
         }
         public void SaveToFile(string name, string text)
         {

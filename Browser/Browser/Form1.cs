@@ -43,6 +43,7 @@ namespace Browser
             browser.DownloadHandler = new DownloadHandler();
             browser.TitleChanged += Browser_TitleChanged;
             LoadPage(Home_website);
+            if (!File.Exists(file_name)) File.Create(file_name).Dispose();
         }
 
         private void LoadPage(string address)
@@ -265,6 +266,7 @@ namespace Browser
                         LoadPage(tab[1]);
                     }
                 }
+                sr.Close();
             }
         }
 
@@ -289,6 +291,7 @@ namespace Browser
                     string[] tab = strline.Split(';');
                     bookmarks_item.Add(tab[0]);
                 }
+                sr.Close();
             }
             return bookmarks_item;
         }
